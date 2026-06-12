@@ -4,25 +4,27 @@ Run each case by invoking the skill with the case input. Grade the output agains
 
 ## Cases
 
+A completed sample workbook lives in [fixtures/sample-workbook.md](fixtures/sample-workbook.md) — fictional vendors **FlowMatic** (the over-claimer) and **Conductor** (honest, with gaps). Cases 1–4 use it as input.
+
 ### Case 1 — dimension selection at intake
-**Input:** "Here's the completed workbook for our workflow-automation evaluation (Workato vs n8n). Assess it."
+**Input:** "Here's the completed workbook for our workflow-automation evaluation." + the fixture. Nothing else.
 
 **Expects:** one batched intake exchange asking which dimension to assess and who consumes the verdict — not a kitchen-sink report across all dimensions at once.
 
 ### Case 2 — the over-claiming vendor
-**Input:** Technical assessment of a workbook where Vendor A answered "fully supported" on all 14 technical requirements with no evidence links, and Vendor B answered "fully" on 9 with doc links, "partially" on 3 with honest gap notes, "roadmap" on 2.
+**Input:** "Technical assessment of this workbook. Consumer: platform engineering leads." + the fixture.
 
-**Expects:** Vendor A's claims graded `ASSERTED` across the board and discounted; Vendor B's graded `DOCUMENTED` where linked; the ranking does NOT reward A's enthusiasm; every must-have of A's sitting on `ASSERTED` appears in the verification plan.
+**Expects:** FlowMatic's 10 evidence-free "fully" answers graded `ASSERTED` and discounted; Conductor's linked answers graded `DOCUMENTED`; the ranking does NOT reward FlowMatic's enthusiasm; every FlowMatic must-have on `ASSERTED` appears in the verification plan; Conductor's honest "partially/roadmap/not supported" answers handled as findings, not penalized below evidence-free claims.
 
 ### Case 3 — contradicted claim is a headline
-**Input:** Workbook where the vendor claims "full webhook replay support" (a must-have), but their public docs state webhooks are fire-and-forget with no replay.
+**Input:** same run as Case 2 (the fixture contains the trap).
 
-**Expects:** claim graded `CONTRADICTED`; finding leads the report and the risk register, keyed to the requirement ID; verdict reflects it (trial gated on this, hold, or avoid — not adopt).
+**Expects:** FlowMatic's TEC-06 "full replay support" graded `CONTRADICTED` against their own fire-and-forget docs excerpt; the finding leads the report and the risk register, keyed to TEC-06; FlowMatic's verdict reflects it (hold or avoid — not adopt, not an ungated trial).
 
-### Case 4 — UX dimension proves generality
-**Input:** "Assess the same workbook for user experience. Verdict consumer: the onboarding ops manager. Users are non-technical onboarding staff, ~200 cases/week."
+### Case 4 — missing dimension handled honestly
+**Input:** "Assess this workbook for user experience. Verdict consumer: the onboarding ops manager." + the fixture (which contains no UX requirement rows).
 
-**Expects:** UX lens applied (workflow fit, learning curve, admin experience — not API quality); findings keyed to the workbook's UX requirement IDs; fitness judged against non-technical staff at the stated volume.
+**Expects:** skill flags that the workbook has no UX-dimension responses to grade rather than improvising a UX verdict from technical data — offers to gather UX requirements/responses (pointing at generate-workbook) or proceed standalone with the stated confidence cap.
 
 ### Case 5 — standalone fallback with confidence cap
 **Input:** "No workbook — we just need a quick technical assessment of Postmark for transactional email, ~2M/month."
