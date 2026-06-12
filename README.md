@@ -9,9 +9,9 @@ A skill is a structured instruction set that turns a general-purpose AI agent in
 | Skill | What it does |
 |---|---|
 | [generate-workbook](skills/generate-workbook/) | Facilitates vendor evaluation: gathers requirements with stakeholders, generates the forms vendors answer, and assembles the workbook that makes downstream comparisons (technical, security, UX, cost) possible |
-| [technical-assessment](skills/technical-assessment/) | Deep technical due-diligence on a vendor or tool — API quality, auth, data handling, lock-in risk — ending in an adopt/trial/hold/avoid recommendation |
+| [workbook-assessment](skills/workbook-assessment/) | Renders a verdict from the workbook, one dimension at a time (technical, security, UX, commercial) — grades every vendor claim by evidence quality and ends in adopt/trial/hold/avoid |
 
-These two skills are a pipeline from a real production workflow: `generate-workbook` produces the evidence base, `technical-assessment` renders the verdict from it. Vendor analysis that used to take an engineer weeks of manual coordination now takes hours, with a cleaner audit trail.
+These two skills are a pipeline from a real production workflow: `generate-workbook` produces the evidence base, `workbook-assessment` renders per-dimension verdicts from it. Vendor analysis that used to take an engineer weeks of manual coordination now takes hours, with a cleaner audit trail.
 
 ## Why evals matter
 
