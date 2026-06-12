@@ -8,7 +8,7 @@ A skill is a structured instruction set that turns a general-purpose AI agent in
 
 | Skill | What it does |
 |---|---|
-| [generate-vendor-workbook](skills/generate-vendor-workbook/) | Compiles third-party vendor research into a structured evaluation workbook — capability matrix, security posture, pricing, integration surface |
+| [generate-workbook](skills/generate-workbook/) | Builds structured, multi-section workbooks — vendor evaluations, technical comparisons, migration plans, audit evidence. Gathers context about purpose and audience first, then shapes sections to fit |
 | [technical-assessment](skills/technical-assessment/) | Deep technical due-diligence on a vendor or tool — API quality, auth, data handling, lock-in risk — ending in an adopt/trial/hold/avoid recommendation |
 
 These two skills come from a real production workflow: third-party vendor analysis that used to take an engineer weeks of manual research now takes hours, with more consistent output.
