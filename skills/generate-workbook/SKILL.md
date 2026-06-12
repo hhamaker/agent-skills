@@ -1,55 +1,75 @@
 ---
 name: generate-workbook
-description: Use when a task calls for a structured, multi-section workbook — vendor evaluations, technical comparisons, migration plans, audit evidence, decision matrices. Gathers context about the workbook's purpose and audience first, then produces sections fit for that purpose.
+description: Use when evaluating vendors or tools for a project — facilitates requirements gathering with stakeholders, generates the forms vendors answer, and assembles the workbook that makes downstream comparisons (technical, security, UX, cost) possible.
 ---
 
 # Generate Workbook
 
-Produce a structured workbook: a multi-section artifact a team uses to compare options, support a decision, plan work, or hand auditors evidence. The skill's first job is understanding what the workbook is *for* — section structure follows purpose, not the other way around.
+Build the instrument that lets a structured vendor evaluation happen. The end goal is a workbook that gives the business three things:
 
-## Phase 1 — Context gathering
+1. **A clear understanding of what the vendor will solve** — stated as requirements the stakeholders own, with the vendor's answers against each one
+2. **What it will cost** — captured from the vendor in a comparable structure
+3. **The evidence base for separate comparisons** — technical, security, user experience, and any other dimension the project needs, each scoreable from the same workbook
 
-Before producing anything, establish:
+The agent's job is **facilitation and instrument design, not omniscience**. Requirements come from stakeholders; answers come from vendors. The skill makes both conversations structured enough to score. The workbook never contains facts the agent invented — only facts the parties supplied.
 
-1. **Purpose** — what decision, plan, or evidence trail does this workbook support?
-2. **Audience** — who reads it (engineers, leadership, auditors, procurement)? Depth and vocabulary follow.
-3. **Subjects** — what's being evaluated, compared, or planned (one vendor, three tools, a migration, a quarter of work)?
-4. **Hard requirements** — non-negotiables that become pass/fail rows (compliance regimes, budget ceilings, deadlines, data residency)
-5. **Output format** — spreadsheet (one tab per section) when the environment supports it, otherwise structured markdown
+## Phase 1 — Frame the project
 
-Ask **only for what's missing and material** — at most a handful of questions, batched in one message. If the request already answers these, skip straight to Phase 2. If answers aren't available, proceed with assumptions labeled prominently in the workbook itself.
+Collaborative. Establish with the requester:
 
-## Phase 2 — Section design
+- What is project X, and what does success look like?
+- Who are the stakeholders, and which dimensions do they own (business, technical, security, UX, finance)?
+- Which vendors are in scope (or is identifying candidates part of the project)?
+- Timeline and decision process — who signs off, by when?
 
-Propose the section structure for this purpose before filling it. Use a template below when one fits; derive a custom structure from the purpose when none does. State which template (or custom rationale) you're using.
+Batch the questions; don't interrogate. Capture answers in the workbook's Overview tab.
 
-### Template: vendor / product evaluation
-Overview · capability matrix · security & compliance · pricing model · integration surface (APIs, auth, webhooks, rate limits) · operational posture (SLA, status history) · risk register · scoring & recommendation
+## Phase 2 — Draft requirements
 
-### Template: technical comparison (N options)
-Decision frame · symmetric capability matrix · cost of adoption per option · cost of exit per option · risk register per option · weighted scoring · recommendation
+Produce a first-pass requirements list from the project framing. Every requirement gets:
 
-### Template: migration / project plan
-Scope & success criteria · current-state inventory · target state · workstream breakdown with owners and dependencies · cutover plan · rollback plan · risk register · open questions
+- **Stable ID** (e.g. `TEC-04`, `SEC-02`) — IDs never change once issued; everything downstream references them
+- **Category** — functional, technical, security, compliance, user experience, budget/commercial
+- **Criticality** — must-have or nice-to-have
+- **Acceptance signal** — how we'd know the requirement is met (one sentence)
 
-### Template: audit / compliance evidence
-Control list · evidence per control (artifact, location, date, owner) · gaps with remediation owner and deadline · attestation summary
+Mark the entire list **DRAFT** — it has no authority until stakeholders have refined it.
 
-## Phase 3 — Research & fill
+## Phase 3 — Stakeholder refinement form
 
-- Work from primary sources; date every claim that can go stale (pricing, certifications, SLAs)
-- Every cell is a sourced fact, a labeled assumption, or `UNKNOWN — needs follow-up`. Never silently infer.
-- Comparisons stay symmetric: every subject gets the same rows, no cherry-picked categories
+Generate a form for stakeholders to refine the draft: confirm, edit, re-weight, add, or strike each requirement, plus free-text for anything the draft missed. One form, sectioned by category so each stakeholder can answer the dimensions they own.
 
-## Phase 4 — Summarize
+When responses come back:
+- Consolidate into the workbook's Requirements tab — now the **source of truth**
+- **Conflicts between stakeholders are flagged, never silently resolved** — list them with both positions and get a decision
+- Keep the stakeholder input trail in its own tab; auditability is a feature
 
-- Executive summary up top: what the workbook supports, the headline finding, the biggest open risk
-- If the workbook supports a decision: weighted scoring plus a one-line verdict
-- List the `UNKNOWN`s as a follow-up checklist — they're the workbook's to-do list, not its failure
+## Phase 4 — Vendor response form
+
+From the finalized requirements, generate the vendor-facing instrument:
+
+- Each requirement becomes a question: *how* does your product meet this?
+- Structured response per question: **fully / partially / not supported / on roadmap**, plus narrative and **evidence requested** (docs link, demo, reference customer)
+- A **commercial section**: pricing model, costs at the project's stated scale, implementation costs, contract terms
+- Identical form for every vendor in scope — symmetry is what makes responses comparable
+
+## Phase 5 — Assemble the workbook
+
+Spreadsheet when the environment supports it (one tab per section), structured markdown otherwise:
+
+1. **Overview** — project frame, stakeholders, vendors, timeline
+2. **Requirements** — the source of truth, by ID
+3. **Stakeholder input** — the refinement trail
+4. **Vendor responses** — one tab per vendor, answers keyed to requirement IDs
+5. **Cost summary** — vendors side by side at the stated scale
+6. **Comparison sheets** — one per dimension (technical, security, UX, …), pre-wired: requirement IDs × vendor answers × criticality weighting, ready for scoring
+
+The comparison sheets are deliberately empty of verdicts. Scoring and recommendation are downstream work (see the `technical-assessment` skill for the technical dimension) — this workbook is what makes that work possible.
 
 ## Guardrails
 
-- **No fabricated facts.** A workbook with `UNKNOWN` cells is useful; one with invented certifications or pricing is a liability.
-- **No confidential input leakage.** Internal documents provided as context are referenced by ID, never reproduced.
-- **Don't interrogate.** Context gathering is one batched exchange at most; a request that's already clear gets zero questions.
-- **Purpose drives structure.** If the requested sections don't serve the stated purpose, say so and propose better ones — don't silently fill a wrong-shaped workbook.
+- **No invented facts.** Vendor cells contain vendor answers or `AWAITING RESPONSE`. Agent-drafted content is labeled DRAFT until a human confirms it.
+- **IDs are stable.** Renumbering requirements after forms go out breaks the entire chain.
+- **Conflicts surface, never disappear.** Stakeholder disagreement and vendor non-answers are findings, not noise to smooth over.
+- **Symmetric instruments.** Every vendor gets the same form; every comparison sheet uses the same rows.
+- **No confidential leakage.** Internal context goes to vendors only as requirement text, never as attached internal documents or verbatim strategy.
