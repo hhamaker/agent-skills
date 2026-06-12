@@ -32,7 +32,7 @@ Add the marketplace, then install the plugin:
 
 ```
 /plugin marketplace add hhamaker/agent-skills
-/plugin install vendor-workbooks@hhamaker-skills
+/plugin install vendor-workbooks@skills-marketplace
 ```
 
 Both skills then trigger automatically on matching tasks, or invoke them directly as `vendor-workbooks:generate-workbook` and `vendor-workbooks:workbook-assessment`.
