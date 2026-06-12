@@ -1,0 +1,25 @@
+{
+  "name": "agent-skills",
+  "owner": {
+    "name": "Hunter Hamaker",
+    "url": "https://github.com/hhamaker"
+  },
+  "metadata": {
+    "description": "Production-style skills for AI agents — extracted from real workflows and shipped with evals.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "vendor-workbooks",
+      "source": "./",
+      "description": "Vendor-evaluation pipeline: generate-workbook gathers requirements and builds the evidence workbook; workbook-assessment grades vendor answers by evidence quality and renders an adopt/trial/hold/avoid verdict.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Hunter Hamaker"
+      },
+      "license": "MIT",
+      "keywords": ["vendor-evaluation", "procurement", "skills", "evals"],
+      "category": "productivity"
+    }
+  ]
+}
