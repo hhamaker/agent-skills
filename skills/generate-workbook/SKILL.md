@@ -64,7 +64,7 @@ Spreadsheet when the environment supports it (one tab per section), structured m
 5. **Cost summary** — vendors side by side at the stated scale
 6. **Comparison sheets** — one per dimension (technical, security, UX, …), pre-wired: requirement IDs × vendor answers × criticality weighting, ready for scoring
 
-The comparison sheets are deliberately empty of verdicts. Scoring and recommendation are downstream work (see the `technical-assessment` skill for the technical dimension) — this workbook is what makes that work possible.
+The comparison sheets are deliberately empty of verdicts. Scoring and recommendation are downstream work (see the `workbook-assessment` skill, which renders a verdict per dimension) — this workbook is what makes that work possible.
 
 ## Guardrails
 
